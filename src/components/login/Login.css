@@ -35,3 +35,8 @@
 .login-form .form-sign-in {
   margin-top: 1.5rem;
 }
+
+.login-form .login-error-msg {
+  font-size: 12px;
+  color: red;
+}

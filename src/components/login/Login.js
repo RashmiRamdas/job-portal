@@ -11,6 +11,8 @@ import {
 import LockIcon from "@material-ui/icons/Lock";
 import { pink } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import { useGlobalContext, ACTIONS, FIELDS } from "../context/useGlobalContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const [state, dispatch] = useGlobalContext();
+
+  const signIn = () => {
+    if (state.user[FIELDS.USERNAME] && state.user[FIELDS.PASSWORD]) {
+      dispatch({
+        type: ACTIONS.LOGIN_STATUS,
+        value: true,
+      });
+
+      if (state.user[FIELDS.USERTYPE] === "employee") {
+        history.push("/employeeProfile");
+      } else {
+        history.push("/employerProfile");
+      }
+    } else {
+      dispatch({
+        type: ACTIONS.LOGIN_STATUS,
+        value: false,
+      });
+    }
+  };
 
   return (
     <div className="login">
@@ -45,6 +69,13 @@ const Login = () => {
             variant="outlined"
             fullWidth
             margin="dense"
+            onChange={(ev) =>
+              dispatch({
+                type: ACTIONS.CHANGE_VALUE,
+                value: ev.target.value,
+                field: FIELDS.USERNAME,
+              })
+            }
           />
           <TextField
             id="outlined-basic"
@@ -52,9 +83,26 @@ const Login = () => {
             variant="outlined"
             fullWidth
             margin="dense"
+            onChange={(ev) =>
+              dispatch({
+                type: ACTIONS.CHANGE_VALUE,
+                value: ev.target.value,
+                field: FIELDS.PASSWORD,
+              })
+            }
           />
 
-          <RadioGroup name="type">
+          <RadioGroup
+            value={state.user.userType}
+            name="userType"
+            onChange={(ev) =>
+              dispatch({
+                type: ACTIONS.CHANGE_VALUE,
+                value: ev.target.value,
+                field: FIELDS.USERTYPE,
+              })
+            }
+          >
             <FormControlLabel
               value="employer"
               control={<Radio />}
@@ -66,11 +114,17 @@ const Login = () => {
               label="Employee"
             />
           </RadioGroup>
+          {!state.user[FIELDS.IS_SIGN_IN_SUCCESS] ? (
+            <span class="login-error-msg">Please Enter Valid Credentials</span>
+          ) : (
+            ""
+          )}
           <Button
             className="form-sign-in"
             fullWidth
             variant="contained"
             color="primary"
+            onClick={signIn}
           >
             Sign In
           </Button>
