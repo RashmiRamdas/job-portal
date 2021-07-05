@@ -8,21 +8,23 @@ import { GlobalContextProvider } from "./components/context/useGlobalContext";
 function App() {
   return (
     <GlobalContextProvider>
-      <div className="App">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route path="/employeeProfile">
-              <EmployeeProfile />
-            </Route>
-            <Route path="/employerProfile">
-              <EmployerProfile />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+      <main className="App">
+        <div >
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <Login />
+              </Route>
+              <Route path="/employeeProfile">
+                <EmployeeProfile />
+              </Route>
+              <Route path="/employerProfile">
+                <EmployerProfile />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
+      </main>
     </GlobalContextProvider>
   );
 }

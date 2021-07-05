@@ -1,7 +1,13 @@
 import React from "react";
+import Header from "../header/Header";
 
 const EmployerProfile = () => {
-  return <>Employer Profile</>;
+  return (
+    <>
+      <Header />
+      Employer Profile
+    </>
+  );
 };
 
 export default EmployerProfile;

@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url("../../utils/images/bg1.jpg");
+  /* background-image: url("../../utils/images/bg1.jpg"); */
 }
 
 .login-form {

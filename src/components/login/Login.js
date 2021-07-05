@@ -69,6 +69,7 @@ const Login = () => {
             variant="outlined"
             fullWidth
             margin="dense"
+            value={state.user[FIELDS.USERNAME]}
             onChange={(ev) =>
               dispatch({
                 type: ACTIONS.CHANGE_VALUE,
@@ -83,6 +84,7 @@ const Login = () => {
             variant="outlined"
             fullWidth
             margin="dense"
+            value={state.user[FIELDS.PASSWORD]}
             onChange={(ev) =>
               dispatch({
                 type: ACTIONS.CHANGE_VALUE,
